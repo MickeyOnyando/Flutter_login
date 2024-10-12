@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_login/models/user.dart';
 import 'package:flutter_login/pages/authenticate.dart';
+import 'package:flutter_login/pages/home_page.dart';
 import 'package:provider/provider.dart';
 
 class Wrapper extends StatelessWidget {
@@ -10,9 +11,12 @@ class Wrapper extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final  appUserOne = Provider.of<AppUser?>(context);
-    print(appUserOne);
-
     
-    return const Authenticate();
+    if(appUserOne == null){
+      return const Authenticate();
+    }else{
+      return HomePage();
+
+    }
   }
 }
