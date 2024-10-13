@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_login/pages/register.dart';
 import 'package:flutter_login/pages/sign_in.dart';
 
 class Authenticate extends StatefulWidget {
@@ -13,7 +14,7 @@ class _AuthenticateState extends State<Authenticate> {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: SignIn(),
+        child: RegisterPage(),
       ),
     );
   }

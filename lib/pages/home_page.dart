@@ -5,6 +5,8 @@ class HomePage extends StatelessWidget {
 
   final AuthService _auth = AuthService();
 
+  HomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

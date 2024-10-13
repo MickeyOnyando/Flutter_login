@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_login/services/auth.dart';
 
-class SignIn extends StatefulWidget {
-  const SignIn({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  State<SignIn> createState() => _SignInState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _SignInState extends State<SignIn> {
+class _RegisterPageState extends State<RegisterPage> {
   final AuthService _auth = AuthService();
 
   //input state
@@ -18,9 +18,9 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+       appBar: AppBar(
         backgroundColor: Colors.grey.shade600,
-        title: const Text('Sign In'),
+        title: const Text('Register'),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
@@ -59,7 +59,7 @@ class _SignInState extends State<SignIn> {
                   ),
                 ),
                 child: const Text(
-                  "Sign In",
+                  "Register",
                 ),
               ),
             ],
@@ -69,3 +69,4 @@ class _SignInState extends State<SignIn> {
     );
   }
 }
+
