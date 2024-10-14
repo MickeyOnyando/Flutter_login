@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_login/services/auth.dart';
 
 class RegisterPage extends StatefulWidget {
-  const RegisterPage({super.key});
+  final Function toggleView;
+
+  const RegisterPage({super.key,  required this.toggleView});
+
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -21,6 +24,15 @@ class _RegisterPageState extends State<RegisterPage> {
        appBar: AppBar(
         backgroundColor: Colors.grey.shade600,
         title: const Text('Register'),
+        actions: [
+          TextButton.icon(
+            icon: Icon(Icons.person),
+            onPressed: () {
+              widget.toggleView();
+            },
+            label: const Text('Sign In'),
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
