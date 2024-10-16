@@ -13,10 +13,12 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   final AuthService _auth = AuthService();
+  final _formKey = GlobalKey<FormState>();
 
   //input state
   String email = '';
   String password = '';
+  String error= '';
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,7 @@ class _RegisterPageState extends State<RegisterPage> {
         title: const Text('Register'),
         actions: [
           TextButton.icon(
-            icon: Icon(Icons.person),
+            icon: const Icon(Icons.person),
             onPressed: () {
               widget.toggleView();
             },
@@ -37,10 +39,12 @@ class _RegisterPageState extends State<RegisterPage> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
         child: Form(
+          key: _formKey,
           child: Column(
             children: [
               const SizedBox(height: 20),
               TextFormField(
+                validator: (val) => val?.isEmpty ?? false  ? 'Enter an Email': null,
                 onChanged: (value) {
                   setState(() {
                     email = value;
@@ -50,6 +54,8 @@ class _RegisterPageState extends State<RegisterPage> {
               const SizedBox(height: 20),
               TextFormField(
                 obscureText: true,
+                validator: (val) => (val?.length ?? 0) < 6? 'Enter a 6 + character password': null,
+
                 onChanged: (value) {
                   setState(() {
                     password = value;
@@ -59,8 +65,14 @@ class _RegisterPageState extends State<RegisterPage> {
               const SizedBox(height: 40),
               ElevatedButton(
                 onPressed: () async{
-                  print(email);
-                  print(password);
+                  if(_formKey.currentState?.validate() ?? false){
+                   dynamic result =  await _auth.registerWithEmailAndPassword(email, password);
+                   if(result == null){
+                    setState(() {
+                      error = 'Please supply a valid email';
+                    });
+                   }
+                  }
                 },
                 style: const ButtonStyle(
                   fixedSize: WidgetStatePropertyAll<Size>(
@@ -73,6 +85,11 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: const Text(
                   "Register",
                 ),
+              ),
+              const SizedBox(height: 20,),
+              Text(
+                error,
+                style: const TextStyle(color: Colors.red),
               ),
             ],
           ),

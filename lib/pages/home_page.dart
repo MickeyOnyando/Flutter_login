@@ -13,12 +13,18 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Home Page'),
         backgroundColor: Colors.grey.shade700,
-        actions: <Widget>[
+        actions: [
           TextButton.icon(
-            onPressed: () async{
-              await _auth.signingOut();
+            onPressed: () async {
+              try {
+                await _auth.signingOut();
+                // Navigate to the login page or any other page after sign out
+                
+              } catch (e) {
+                print('Error signing out: $e');
+              }
             },
-            label: const Text('Logout'),
+            label: const Text('Logoff'),
             icon: const Icon(Icons.exit_to_app),
           ),
         ],
